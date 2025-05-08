@@ -14,8 +14,10 @@ import java.net.Socket;
 public class WebServer {
     public static void main(String[] args) throws IOException {
 //        demo1();
-        demo2();
+//        demo2();
+        demo3();
     }
+
 
     public static void demo1() throws IOException {
         ServerSocket serverSocket = new ServerSocket(8080);
@@ -47,5 +49,22 @@ public class WebServer {
         outputStream.flush();
         // 这个输出流不要着急关，因为突然的关闭会导致浏览器和服务器的连接断开
     }
+
+    public static void demo3() throws IOException {
+        ServerSocket serverSocket = new ServerSocket(8080);
+        Socket socket = serverSocket.accept();
+        InputStream inputStream = socket.getInputStream();
+        byte[] bytes = new byte[1024];
+        int len;
+
+        while((len = inputStream.read(bytes)) != -1)
+        {
+            Request hand = RequestHandler.hand(new String(bytes, 0, len));
+            System.out.println(hand);
+        }
+        inputStream.close();
+        socket.close();
+    }
+
 
 }
