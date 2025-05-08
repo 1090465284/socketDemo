@@ -35,4 +35,11 @@ public class SocketServer {
 //        inputStream.close();
 //        socket.close();
     }
+
+// 多客户端伪代码
+//    while(true)
+//    {
+//        Socket socket = serverSocket.accept();
+//        new ServerThread(socket).start();
+//    }
 }
